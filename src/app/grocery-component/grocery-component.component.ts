@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-grocery-component',
   templateUrl: './grocery-component.component.html',
   styleUrls: ['./grocery-component.component.css']
 })
+
 export class GroceryComponentComponent implements OnInit {
 
 
@@ -22,6 +22,12 @@ export class GroceryComponentComponent implements OnInit {
 
   deleteitemsuccessMsg:string;
   hidedeleteitemsuccessMsg:boolean;
+
+  clearItemsMsg: string;
+  hideClearItemsMsg: boolean;
+
+  clearAllText: string;
+  hideClearAllText: boolean;
   constructor() { }
 
   ngOnInit(): void {
@@ -34,14 +40,39 @@ export class GroceryComponentComponent implements OnInit {
     this.hideduplicateMsg=true;
     this.hidevaliditemMsg=true;
     this.hidedeleteitemsuccessMsg=true;
+    this.hideClearItemsMsg = true;
+    this.hideClearAllText = false;
+    //messages
+    this.clearAllText = 'Clear All';
 
   }
 
+  //invalid item error
+  private enterValidItem(list){
+  this.hideErrorMsg = false;
+    this.hideClearAllText = true;
+    this.errorMsg = 'Enter a valid item to be added to the list.';
+  }
+  //delete success
+  private delSuccessMessages(item){
+    this.hidedeleteitemsuccessMsg = false;
+    this.deleteitemsuccessMsg = `The item "${item}" was successfully deleted.`;
+  }
+  //clear all clearItemsMsg
+  private clearAllItemsMessages(){
+    this.clearItemsMsg = 'All items have been successfully cleared!'
+    this.hideClearAllText = true;
+  }
+  // No Item in List settings
+  private noItemInListSettings(){
+    this.hideClearAllText = true;
+  }
+
   addItemToList()
-  {
+  {this.firstmessagevalues();
     if(this.item.name.trim() != '')
     {
-      this.firstmessagevalues();
+
       // CHECK IF ITEM ALREADY EXISTS IN LIST -
       // when typed as is, typed in singular form or in plural form
       if(this.list.some(li =>
@@ -68,11 +99,10 @@ export class GroceryComponentComponent implements OnInit {
     }
     else
     {
-      this.hideErrorMsg = false;
-      this.errorMsg = 'Enter a valid item.'
+      this.enterValidItem(this.list);
     }
     localStorage.setItem("itemName", JSON.stringify(this.list));
-    let myitem = localStorage.getItem("itemName" )
+    let myitem = localStorage.getItem("itemName" );
       let myitemlist = JSON.parse(myitem);
   }// end of addListItem
 
@@ -90,8 +120,7 @@ export class GroceryComponentComponent implements OnInit {
            if(item.id == this.list[i].id)
             {
               this.list.splice(i,1);
-              this.hidedeleteitemsuccessMsg=false;
-              this.deleteitemsuccessMsg=`the item ${item.name} with id ${item.id}deleted successfully`;
+              this.delSuccessMessages(item.name);
              break;
             }
          }
@@ -111,12 +140,46 @@ export class GroceryComponentComponent implements OnInit {
           myitemlist.splice(i,1);
           break;
          }
+        //  console.log(myitemlist);
         }
-        console.log(myitemlist);
         localStorage.setItem("itemName", JSON.stringify(myitemlist));
-        let myitemafterdeletion = localStorage.getItem("itemName" )
+        let myitemafterdeletion = localStorage.getItem("itemName" );
+        console.log("List after deletion"+myitemafterdeletion);
       let myitemlistafterdeletion = JSON.parse(myitemafterdeletion);
 
+
+      if(this.list.length == 0){
+        // this.hideStrikeThroughMsg = true;
+        // this.hideClearAllText = true;
+        this.noItemInListSettings();
+      }
+
   }//end of deleteItemFromList function
+
+  clearAllItemsFromList(){
+    this.firstmessagevalues();
+    this.hideClearItemsMsg = false;
+    if(this.list.length > 0){
+      for(let i=this.list.length; i>=0; i--){
+        //console.log(this.list[i]);
+        this.list.pop();
+        this.clearAllItemsMessages();
+      }
+    }
+    let myitem = localStorage.getItem("itemName" );
+      let myitemlist = JSON.parse(myitem);
+      console.log(myitemlist);
+      if(myitemlist.length>0){
+        for(let i=myitemlist.length;i>=0;i--)
+        {
+          console.log("came into clear all for loop");
+        myitemlist.pop();
+        }
+      }
+      localStorage.setItem("itemName", JSON.stringify(myitemlist));
+      let myitemafterclearall = localStorage.getItem("itemName" );
+      console.log(myitemafterclearall);
+      let myitemlistafterclearallitems = JSON.parse(myitemafterclearall);
+  }
 
 }

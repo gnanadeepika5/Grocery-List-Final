@@ -76,11 +76,15 @@
     <span *ngIf="list">
       Number of items in your list: {{list.length}}
     </span>
+    <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
+      {{clearAllText}}
+    </button>
+    <br>
     <ul id="show-list" class="list-group">
       <li *ngFor="let item of list" class="list-group-item">
         <span>{{item.name}}</span>
         <span>
-          <button type="button" id="deleteitembutton" (click) = "deleteItemFromList(item)">
+          <button type="button"class="btn text-danger float-right hover-cursor" id="deleteitembutton" (click) = "deleteItemFromList(item)">
             <i class="far fa-trash-alt"></i>
           </button>
         </span>
@@ -89,10 +93,10 @@
   </div>
 
   <div>
-    <span [hidden]="hideErrorMsg" class="text-danger">{{errorMsg}}</span>
-    <span [hidden]="hideduplicateMsg" class="text-secondary">{{duplicateMsg}}</span>
-    <span [hidden]="hidevaliditemMsg" class="text-secondary">{{validitemMsg}}</span>
-    <span [hidden]="hidedeleteitemsuccessMsg" class="text-secondary">{{deleteitemsuccessMsg}}</span>
+    <span [hidden]="hideErrorMsg" class="text-danger float-left">{{errorMsg}}</span>
+    <span [hidden]="hideduplicateMsg" class="text-secondary float-left">{{duplicateMsg}}</span>
+    <span [hidden]="hidevaliditemMsg" class="text-secondary float-left">{{validitemMsg}}</span>
+    <span [hidden]="hidedeleteitemsuccessMsg" class="text-secondary float-left">{{deleteitemsuccessMsg}}</span>
   </div>
 
 </div>
