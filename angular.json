@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Grocery-List-Final"
+    }
+  },
+  "defaultProject": "Grocery-List-Final",
+  "cli": {
+    "analytics": false
+  }
 }
