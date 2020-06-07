@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grocery-component.component.css']
 })
 
-export class GroceryComponentComponent implements OnInit {
+export class GroceryComponentComponent {
 
 
   // item: string;
@@ -110,51 +110,6 @@ export class GroceryComponentComponent implements OnInit {
 
 
 
-
-
-  deleteItemFromList(item)
-  {
-    this.firstmessagevalues();
-       for(let i=0; i<this.list.length; i++)
-         {
-           if(item.id == this.list[i].id)
-            {
-              this.list.splice(i,1);
-              this.delSuccessMessages(item.name);
-             break;
-            }
-         }
-    let myitem = localStorage.getItem("itemName" );
-      let myitemlist = JSON.parse(myitem);
-      console.log(myitemlist);
-
-        //  let myitem = localStorage.getItem("itemName" );
-         for(let i=0; i<=myitemlist.length;i++)
-         {
-           console.log(" came into for loop");
-          if(item.name == myitemlist[i].name)
-         {
-          console.log(" came into if loop");
-          let deleteitem = myitemlist[i].name;
-
-          myitemlist.splice(i,1);
-          break;
-         }
-        //  console.log(myitemlist);
-        }
-        localStorage.setItem("itemName", JSON.stringify(myitemlist));
-        let myitemafterdeletion = localStorage.getItem("itemName" );
-        console.log("List after deletion"+myitemafterdeletion);
-      let myitemlistafterdeletion = JSON.parse(myitemafterdeletion);
-
-
-      if(this.list.length == 0){
-        // this.hideStrikeThroughMsg = true;
-        // this.hideClearAllText = true;
-        this.noItemInListSettings();
-      }
-
-  }//end of deleteItemFromList function
 
   clearAllItemsFromList(){
     this.firstmessagevalues();

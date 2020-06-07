@@ -1,0 +1,21 @@
+#jumbotron-container
+{
+/* background-image:"../../assets/orange.jpg"; */
+background-color: brown;
+}
+#nav-bar{
+  background-color: green;
+  color:black;
+}
+#add-to-cart-icon{
+  color:white;
+}
+h1{
+  color:yellow;
+}
+#displayitems{
+  background-color: yellowgreen;
+}
+#errmsg{
+  color: whitesmoke;
+}
