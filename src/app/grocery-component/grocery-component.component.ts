@@ -28,7 +28,7 @@ export class GroceryComponentComponent {
 
   clearAllText: string;
   hideClearAllText: boolean;
-  
+
   additemmsg:string;
   hideadditemmsg:false;
   constructor() { }
@@ -107,42 +107,43 @@ export class GroceryComponentComponent {
     {
       this.enterValidItem(this.list);
     }
-    localStorage.setItem("itemName", JSON.stringify(this.list));
-    let myitem = localStorage.getItem("itemName" );
-      let myitemlist = JSON.parse(myitem);
-    //   console.log("inadd");
-    // console.log(myitemlist);
   }// end of addListItem
 
+deleteItemFromList(item)
+{
+  this.firstmessagevalues();
+     for(let i=0; i<this.list.length; i++)
+       {
+         if(item.id == this.list[i].id)
+          {
+            this.list.splice(i,1);
+            this.delSuccessMessages(item.name);
+           break;
+          }
+       }
+
+if(this.list.length == 0){
+  // this.hideStrikeThroughMsg = true;
+  // this.hideClearAllText = true;
+  this.noItemInListSettings();
+}
+}
 
 
 
 
 
-  // clearAllItemsFromList(){
-  //   this.firstmessagevalues();
-  //   this.hideClearItemsMsg = false;
-  //   if(this.list.length > 0){
-  //     for(let i=this.list.length; i>=0; i--){
-  //       //console.log(this.list[i]);
-  //       this.list.pop();
-  //       this.clearAllItemsMessages();
-  //     }
-  //   }
-  //   let myitem = localStorage.getItem("itemName" );
-  //     let myitemlist = JSON.parse(myitem);
-  //     console.log(myitemlist);
-  //     if(myitemlist.length>0){
-  //       for(let i=myitemlist.length;i>=0;i--)
-  //       {
-  //         console.log("came into clear all for loop");
-  //       myitemlist.pop();
-  //       }
-  //     }
-  //     localStorage.setItem("itemName", JSON.stringify(myitemlist));
-  //     let myitemafterclearall = localStorage.getItem("itemName" );
-  //     console.log(myitemafterclearall);
-  //     let myitemlistafterclearallitems = JSON.parse(myitemafterclearall);
- // }
+
+  clearAllItemsFromList(){
+    this.firstmessagevalues();
+    this.hideClearItemsMsg = false;
+    if(this.list.length > 0){
+      for(let i=this.list.length; i>=0; i--){
+        //console.log(this.list[i]);
+        this.list.pop();
+        this.clearAllItemsMessages();
+      }
+    }
+ }
 
 }

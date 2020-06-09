@@ -12,6 +12,11 @@
         <li class="nav-item">
           <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Sign Up</a>
         </li>
+        <li class="nav-item">
+          <button type="button" class="btn btn-light" id="shopping-cart">
+            <i class="fa fa-shopping-cart"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -32,10 +37,31 @@
     </div>
   </div>
 
-  <app-cart-component></app-cart-component>
-
   <br>
-  
+
+<div id="displayitems">
+  <span *ngIf="list">
+    Number of items in your list: {{list.length}}
+  </span>
+  <!-- <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
+    {{clearAllText}}
+  </button> -->
+  <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
+    clear
+  </button>
+  <br>
+  <ul id="show-list" class="list-group">
+    <li *ngFor="let item of list" class="list-group-item">
+      <span>{{item.name}}</span>
+      <span>
+        <button type="button"class="btn text-danger float-right hover-cursor" id="deleteitembutton" (click) = "deleteItemFromList(item)">
+            <i class="far fa-trash-alt"></i>
+        </button>
+      </span>
+    </li>
+  </ul>
+</div>
+
   <div>
     <!-- <span [hidden]="hideErrorMsg" class="text-danger float-left">{{errorMsg}}</span> -->
     <span [hidden]="hideduplicateMsg" class="text-secondary float-left">{{duplicateMsg}}</span>
