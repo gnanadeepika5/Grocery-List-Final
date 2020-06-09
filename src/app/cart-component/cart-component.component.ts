@@ -25,6 +25,10 @@ export class CartComponentComponent {
 
   clearAllText: string;
   hideClearAllText: boolean;
+
+  additemmsg:string;
+  hideadditemmsg:false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -70,11 +74,10 @@ deleteItemFromList(item)
              break;
             }
          }
-    let myitem = localStorage.getItem("itemName" );
+    //start of local storage
+         let myitem = localStorage.getItem("itemName" );
       let myitemlist = JSON.parse(myitem);
       console.log(myitemlist);
-
-        //  let myitem = localStorage.getItem("itemName" );
          for(let i=0; i<=myitemlist.length;i++)
          {
            console.log(" came into for loop");
@@ -95,7 +98,7 @@ deleteItemFromList(item)
         let myitemafterdeletion = localStorage.getItem("itemName" );
         console.log("List after deletion"+myitemafterdeletion);
       let myitemlistafterdeletion = JSON.parse(myitemafterdeletion);
-
+//end of local storage
 
       if(this.list.length == 0){
         // this.hideStrikeThroughMsg = true;
@@ -115,26 +118,34 @@ deleteItemFromList(item)
         this.clearAllItemsMessages();
       }
     }
-    let myitem = localStorage.getItem("itemName" );
-      let myitemlist = JSON.parse(myitem);
-      console.log(myitemlist);
-      if(myitemlist.length>0){
-        for(let i=myitemlist.length;i>=0;i--)
-        {
-          console.log("came into clear all for loop");
-        myitemlist.pop();
-        }
-      }
-      localStorage.setItem("itemName", JSON.stringify(myitemlist));
-      let myitemafterclearall = localStorage.getItem("itemName" );
-      console.log(myitemafterclearall);
-      let myitemlistafterclearallitems = JSON.parse(myitemafterclearall);
+    localStorage.removeItem("itemName");
+    //start of local storage
+    // let myitemafterdeletion = localStorage.getItem("itemName" );//string
+    //   let myitemlistafterdeletion = JSON.parse(myitem);//list
+    //   console.log(myitemlistafterdeletion);
+    //   if(myitemlistafterdeletion.length>0){
+    //     for(let i=myitemlistafterdeletion.length;i>=0;i--)
+    //     {
+    //       console.log("came into clear all for loop");
+    //     myitemlistafterdeletion.pop();
+    //     }
+    //   }
+    //   localStorage.setItem("itemName", JSON.stringify(myitemlistafterdeletion));
+    //  // localStorage.removeItem("itemName");
+      //end of local storage
+      // let myitemafterclearall = localStorage.getItem("itemName" );
+      // console.log(myitemafterclearall);
+
+      console.log("cleared localstorage");
+      //let myitemlistafterclearallitems = JSON.parse(myitemafterclearall);
+
   }
 
 
   showdetailsoflist()
   {
 
+//local storage
     let myitem = localStorage.getItem("itemName" );
       let myitemlist = JSON.parse(myitem);
       console.log("came to cart");

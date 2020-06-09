@@ -1,3 +1,4 @@
+
 <span>
   <button type="button" class="btn btn-light" id="shopping-cart" (click)="showdetailsoflist()">
     <i class="fa fa-shopping-cart"></i>
@@ -12,8 +13,8 @@
   <!-- <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
     {{clearAllText}}
   </button> -->
-  <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" (click)="clearAllItemsFromList()">
-    clear all
+  <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
+    clear
   </button>
   <br>
   <ul id="show-list" class="list-group">
@@ -30,6 +31,8 @@
 
 <div>
   <!-- <span [hidden]="hideErrorMsg" class="text-danger float-left">{{errorMsg}}</span> -->
+
+  <span [hidden]="hideadditemmsg" class="text-secondary float-left">{{additemmsg}}</span>
   <span [hidden]="hideduplicateMsg" class="text-secondary float-left">{{duplicateMsg}}</span>
   <span [hidden]="hidevaliditemMsg" class="text-secondary float-left">{{validitemMsg}}</span>
   <span [hidden]="hidedeleteitemsuccessMsg" class="text-secondary float-left">{{deleteitemsuccessMsg}}</span>

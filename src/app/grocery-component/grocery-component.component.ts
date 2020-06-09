@@ -28,6 +28,9 @@ export class GroceryComponentComponent {
 
   clearAllText: string;
   hideClearAllText: boolean;
+  
+  additemmsg:string;
+  hideadditemmsg:false;
   constructor() { }
 
   ngOnInit(): void {
@@ -77,7 +80,8 @@ export class GroceryComponentComponent {
       // when typed as is, typed in singular form or in plural form
       if(this.list.some(li =>
         (li.name.trim() === this.item.name || li.name.trim() === this.item.name+'s' ||
-        li.name.trim() === this.item.name.slice(0,-1) || li.name.trim() === this.item.name.slice(0,-2) || li.name.trim() === this.item.name+'es') && (this.item.id == 0)))
+        // li.name.trim() === this.item.name.slice(0,-1) || li.name.trim() === this.item.name.slice(0,-2) ||
+        li.name.trim() === this.item.name+'es') && (this.item.id == 0)))
         {
           this.hideduplicateMsg = false;
           this.duplicateMsg = `The entered item "${this.item.name}" already exists in list.`
@@ -89,6 +93,8 @@ export class GroceryComponentComponent {
           this.hideduplicateMsg = true;
           this.list.push({name: this.item.name.trim(), id: new Date().getTime()});
           console.log(this.list);
+          this.hideadditemmsg=false;
+          this.additemmsg=`please click on cart button below to see newly/recently added item:"${this.item.name}"`;
         }
       }
       this.item =
@@ -104,6 +110,8 @@ export class GroceryComponentComponent {
     localStorage.setItem("itemName", JSON.stringify(this.list));
     let myitem = localStorage.getItem("itemName" );
       let myitemlist = JSON.parse(myitem);
+    //   console.log("inadd");
+    // console.log(myitemlist);
   }// end of addListItem
 
 
@@ -111,30 +119,30 @@ export class GroceryComponentComponent {
 
 
 
-  clearAllItemsFromList(){
-    this.firstmessagevalues();
-    this.hideClearItemsMsg = false;
-    if(this.list.length > 0){
-      for(let i=this.list.length; i>=0; i--){
-        //console.log(this.list[i]);
-        this.list.pop();
-        this.clearAllItemsMessages();
-      }
-    }
-    let myitem = localStorage.getItem("itemName" );
-      let myitemlist = JSON.parse(myitem);
-      console.log(myitemlist);
-      if(myitemlist.length>0){
-        for(let i=myitemlist.length;i>=0;i--)
-        {
-          console.log("came into clear all for loop");
-        myitemlist.pop();
-        }
-      }
-      localStorage.setItem("itemName", JSON.stringify(myitemlist));
-      let myitemafterclearall = localStorage.getItem("itemName" );
-      console.log(myitemafterclearall);
-      let myitemlistafterclearallitems = JSON.parse(myitemafterclearall);
-  }
+  // clearAllItemsFromList(){
+  //   this.firstmessagevalues();
+  //   this.hideClearItemsMsg = false;
+  //   if(this.list.length > 0){
+  //     for(let i=this.list.length; i>=0; i--){
+  //       //console.log(this.list[i]);
+  //       this.list.pop();
+  //       this.clearAllItemsMessages();
+  //     }
+  //   }
+  //   let myitem = localStorage.getItem("itemName" );
+  //     let myitemlist = JSON.parse(myitem);
+  //     console.log(myitemlist);
+  //     if(myitemlist.length>0){
+  //       for(let i=myitemlist.length;i>=0;i--)
+  //       {
+  //         console.log("came into clear all for loop");
+  //       myitemlist.pop();
+  //       }
+  //     }
+  //     localStorage.setItem("itemName", JSON.stringify(myitemlist));
+  //     let myitemafterclearall = localStorage.getItem("itemName" );
+  //     console.log(myitemafterclearall);
+  //     let myitemlistafterclearallitems = JSON.parse(myitemafterclearall);
+ // }
 
 }
