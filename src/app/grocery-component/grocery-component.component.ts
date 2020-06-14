@@ -119,6 +119,13 @@ export class GroceryComponentComponent {
       this.hideStrikeThroughMsg = true;
     }
   }// end of addListItem
+  // EDIT an existing item
+  // When the user clicks on 'pencil' icon, the item is displayed on the input text box to be edited.
+  // The user types in the new value and is updated in the list.
+  editListItem(item){
+    this.firstmessagevalues();
+    this.item = item;
+  }
 
 deleteItemFromList(item)
 {
