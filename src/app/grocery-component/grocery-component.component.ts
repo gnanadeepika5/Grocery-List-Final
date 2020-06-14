@@ -31,6 +31,9 @@ export class GroceryComponentComponent {
 
   additemmsg:string;
   hideadditemmsg:false;
+
+  strikeThroughMessage: string;
+  hideStrikeThroughMsg: boolean;
   constructor() { }
 
   ngOnInit(): void {
@@ -47,11 +50,16 @@ export class GroceryComponentComponent {
     this.hideClearAllText = false;
     //messages
     this.clearAllText = 'Clear All';
+    this.strikeThroughMessage = 'Click on the icon at the end of each item to enable/disable strikethrough.'
 
   }
 
   //invalid item error
   private enterValidItem(list){
+    if(this.list.length == 0){
+      this.hideStrikeThroughMsg = true;
+    }
+    this.hideStrikeThroughMsg = false;
   this.hideErrorMsg = false;
     this.hideClearAllText = true;
     this.errorMsg = 'Enter a valid item to be added to the list.';
@@ -65,9 +73,11 @@ export class GroceryComponentComponent {
   private clearAllItemsMessages(){
     this.clearItemsMsg = 'All items have been successfully cleared!'
     this.hideClearAllText = true;
+    this.hideStrikeThroughMsg = true;
   }
   // No Item in List settings
   private noItemInListSettings(){
+    this.hideStrikeThroughMsg = true;
     this.hideClearAllText = true;
   }
 
@@ -106,6 +116,7 @@ export class GroceryComponentComponent {
     else
     {
       this.enterValidItem(this.list);
+      this.hideStrikeThroughMsg = true;
     }
   }// end of addListItem
 
@@ -145,5 +156,22 @@ if(this.list.length == 0){
       }
     }
  }
+ // STRIKE/UNSTRIKE the list Item
+  // Upon clicking the strikethrough icon at the end of each item,
+  // the user is able to either enable or disable strikethrough for that respective item.
+  strikeListItem(item){
+    this.firstmessagevalues();
+    for(let i=0; i<this.list.length; i++){
+      if(item.id == this.list[i].id){
+        if(this.list[i].strike){
+          this.list[i].strike = false;
+        }
+        else{
+          this.list[i].strike = true;
+        }
+        break;
+      }
+    }
+  }
 
 }

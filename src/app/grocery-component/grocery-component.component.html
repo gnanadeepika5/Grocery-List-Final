@@ -43,16 +43,28 @@
   <span *ngIf="list">
     Number of items in your list: {{list.length}}
   </span>
-  <!-- <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
-    {{clearAllText}}
-  </button> -->
   <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button" id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
-    clear
+    Clear All
   </button>
   <br>
+  <br>
+  <div>
+    <!--Begin strikethrough info-->
+    <div style="width:80%; margin:auto;">
+      <p [hidden]="hideStrikeThroughMsg" class="text-info">
+        <small>{{strikeThroughMessage}}</small>
+      </p>
+    </div><!--End strikethrough info-->
   <ul id="show-list" class="list-group">
     <li *ngFor="let item of list" class="list-group-item">
-      <span>{{item.name}}</span>
+      <span [ngClass]="{'strike': item.strike}">
+            {{item.name}}
+          </span>
+          <span>
+            <button class="btn text-secondary float-right hover-cursor" type="button" id="strikeListItemBtn" (click)="strikeListItem(item)">
+              <i class="fas fa-strikethrough"></i>
+            </button>
+          </span>
       <span>
         <button type="button"class="btn text-danger float-right hover-cursor" id="deleteitembutton" (click) = "deleteItemFromList(item)">
             <i class="far fa-trash-alt"></i>
